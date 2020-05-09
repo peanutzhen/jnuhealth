@@ -1,0 +1,311 @@
+login info end:
+
+{
+'pageref': 'stuhealth', 
+'startedDateTime': '2020-05-09T14:55:00.198+08:00',
+'request': {
+     'method': 'POST', 
+     'url': 'https://stuhealth.jnu.edu.cn/api/user/login', 
+     'httpVersion': 'HTTP/1.1', 
+     'cookies': [], 
+     'headers': [
+        {
+             'name': 'Host', 
+             'value': 'stuhealth.jnu.edu.cn'
+        }, 
+        {
+            'name': 'Connection', 
+            'value': 'keep-alive'
+        }, 
+        {
+            'name': 'Content-Length', 
+            'value': '63'
+        }, 
+        {
+            'name': 'Accept', 
+            'value': 'application/json, text/plain, */*'
+        }, 
+        {
+            'name': 'User-Agent', 
+            'value': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'
+        }, 
+        {
+            'name': 'Content-Type', 
+            'value': 'application/json'
+        },
+        {
+            'name': 'Origin', 
+            'value': 'https://stuhealth.jnu.edu.cn'
+        }, 
+        {
+            'name': 'Sec-Fetch-Site', 
+            'value': 'same-origin'
+        },
+        {
+            'name': 'Sec-Fetch-Mode',
+            'value': 'cors'
+        },
+        {
+            'name': 'Sec-Fetch-Dest',
+             'value': 'empty'
+        }, 
+        {
+            'name': 'Referer',
+            'value': 'https://stuhealth.jnu.edu.cn/'
+        }, 
+        {
+            'name': 'Accept-Encoding', 
+            'value': 'gzip, deflate, br'
+        },
+        {
+            'name': 'Accept-Language', 
+            'value': 'zh-CN,zh;q=0.9'
+        }
+        ], 
+        'queryString': [], 
+        'postData': {
+            'mimeType': 'application/json', 
+            'text': '{
+                "username":"2018054625",
+                "password":"VDo0NKHvsjLdbUA1Fi8NYg*="
+            }', 
+            'comment': ''
+        }, 
+        'headersSize': 532, 
+        'bodySize': 63, 
+        'comment': ''
+        }, 
+        'response': {
+            'status': 0,
+             'statusText': '',
+              'httpVersion': 'unknown',
+               'cookies': [], 
+               'headers': [], 
+               'content': {'size': 0, 'mimeType': '', 'comment': ''}, 
+               'redirectURL': '', 
+               'headersSize': -1, 
+               'bodySize': -1, 
+               'comment': '', 
+               '_error': 'No response received'}, 
+               'cache': {}, 
+               'timings': {'comment': '', 'receive': 0, 'dns': -1, 'wait': 0, 'connect': -1, 'send': 0, 'blocked': -1, 'ssl': -1}, 'serverIPAddress': '27.148.207.177', 'comment': '', 'time': 0}
+
+
+stuinfo response:
+               {
+                   "meta":{
+                       "msg":"获取学生信息成功，再次填写",
+                       "code":2001,"success":true,
+                       "response":"1070",
+                       "timestamp":"2020-05-09 15:37:36"
+                       },
+                    "data":{
+                        "xbm":"男",
+                        "declare_time":"2020-05-09",
+                        "jnuId":"2018054625",
+                        "nation":"",
+                        "city":"",
+                        "counselorList":[
+                            {
+                                "id":null,
+                                "rsbh":"2000033",
+                                "name":"洪莹",
+                                "dw":null,
+                                "type":null
+                            },
+                            {
+                                "id":null,
+                                "rsbh":"2006100",
+                                "name":"江秀海",
+                                "dw":null,
+                                "type":null
+                            },
+                            {
+                                "id":null,
+                                "rsbh":"2013217",
+                                "name":"杨雨晨",
+                                "dw":null,
+                                "type":null
+                            },
+                            {
+                                "id":null,
+                                "rsbh":"2016407",
+                                "name":"潘俏逸",
+                                "dw":null,
+                                "type":null
+                            },
+                            {
+                                "id":null,
+                                "rsbh":"0005875*",
+                                "name":"张磊",
+                                "dw":null,
+                                "type":null
+                            }
+                        ],
+                        "location_x":"",
+                        "location_y":"",
+                        "yxsmc":"信息科学技术学院",
+                        "mainTable":{
+                            "id":6453573,
+                            "chooseType1":"",
+                            "chooseType2":"",
+                            "personNo":"2018054625",
+                            "personName":null,
+                            "sex":null,
+                            "birthday":"",
+                            "personType":"14.145.23.57",
+                            "phoneArea":"+86",
+                            "phone":"13725165639",
+                            "collegeCode":"",
+                            "professionName":null,
+                            "collegeName":null,
+                            "classCode":"",
+                            "className":"18计科",
+                            "personHealth":"1",
+                            "personHealth2":"0",
+                            "personState":"",
+                            "personState2":"",
+                            "personC1id":"440000",
+                            "personC1":"广东省",
+                            "personC2id":"440100"
+                            ,"personC2":"广州市",
+                            "personC3id":"440113",
+                            "personC3":"番禺区",
+                            "personC4":"洛溪新城吉祥南街16栋之一601",
+                            "schoolC1":"",
+                            "schoolC2":"",
+                            "otherC1":"",
+                            "otherC2":"",
+                            "otherC3":"",
+                            "otherC4":"无",
+                            "wayStart":"2020-01-08",
+                            "wayType1":"0",
+                            "wayType2":"0",
+                            "wayType3":"0",
+                            "wayType4":"",
+                            "wayType5":"0",
+                            "wayTypeOther":"地铁",
+                            "wayType6":"1",
+                            "wayNo":"不知道",
+                            "way2Start":"",
+                            "way2Type1":"",
+                            "way2Type2":"",
+                            "way2Type3":"",
+                            "way2Type4":"",
+                            "way2Type5":"",
+                            "way2Type6":"",
+                            "way2Other":"",
+                            "way2No":"",
+                            "isFamily":"",
+                            "isFamilyState":"",
+                            "isPass14C1":"0",
+                            "isPass14C2":"0",
+                            "isPass14C3":"0",
+                            "isPassHb":"",
+                            "passAreaC2":"",
+                            "passAreaC3":"",
+                            "passAreaC4":"",
+                            "isSick1":"",
+                            "isSick2":"",
+                            "isSick3":"",
+                            "isSick4":"",
+                            "isSick5":"",
+                            "isSick6":"",
+                            "isSick7":"",
+                            "otherSick":"",
+                            "createTime":"2020-05-08 19:13:16",
+                            "del":"0",
+                            "personSick":"",
+                            "isNew":"",
+                            "temperature":"36",
+                            "other":"",
+                            "assistantName":"洪莹",
+                            "assistantNo":"2000033",
+                            "currentArea":"1",
+                            "passArea":"",
+                            "linkman":"陈亚芳",
+                            "linkmanPhone":"13728031527",
+                            "schoolArea":"",
+                            "linkmanPhoneArea":"+86",
+                            "leaveState":"1",
+                            "leaveTime":"",
+                            "arriveTime":"2020-01-08",
+                            "inChina":"1",
+                            "countryArea":"",
+                            "cityArea":"",
+                            "backTime":"",
+                            "backHubei":"",
+                            "leaveHubei":"0",
+                            "backTransportation":"",
+                            "leaveTransportation":"",
+                            "backTransportationOther":"",
+                            "leaveTransportationOther":"",
+                            "backTransportationShift":"",
+                            "leaveTransportationShift":"",
+                            "language":"cn",
+                            "declareTime":null
+                        },
+                        "province":"",
+                        "xm":"甄洛生",
+                        "zy":"计算机科学与技术"
+                    }
+                }
+
+submission info:
+
+{
+    "mainTable":{
+        "wayStart":"2020-01-08",
+        "arriveTime":"2020-01-08",
+        "way2Start":"",
+        "language":"cn",
+        "declareTime":"2020-05-09",
+        "personNo":"2018054625",
+        "personName":"甄洛生",
+        "sex":"男",
+        "professionName":"计算机科学与技术",
+        "collegeName":"信息科学技术学院",
+        "phoneArea":"+86",
+        "phone":"13725165639",
+        "assistantName":"洪莹",
+        "assistantNo":"2000033",
+        "className":"18计科",
+        "linkman":"陈亚芳",
+        "linkmanPhoneArea":"+86",
+        "linkmanPhone":"13728031527",
+        "personHealth":"1",
+        "temperature":"36",
+        "personHealth2":"0",
+        "leaveState":"1",
+        "leaveHubei":"0",
+        "wayType1":"0",
+        "wayType2":"0",
+        "wayType3":"0",
+        "wayType5":"0",
+        "wayType6":"1",
+        "wayTypeOther":"地铁",
+        "wayNo":"不知道",
+        "currentArea":"1",
+        "inChina":"1",
+        "personC1id":"440000",
+        "personC1":"广东省",
+        "personC2id":"440100",
+        "personC2":"广州市",
+        "personC3id":"440113",
+        "personC3":"番禺区",
+        "personC4":"洛溪新城吉祥南街16栋之一601",
+        "otherC4":"无",
+        "isPass14C1":"0",
+        "isPass14C2":"0",
+        "isPass14C3":"0"
+    },
+    "jnuid":"HmhKsZPhQC9Cobq84WjS2Q**"
+}
+
+write back response:
+
+{
+    "meta":{
+        "msg":"插入问卷数据成功",
+        "code":6666,
+        "success":true,"response":"1060","timestamp":"2020-05-09 16:06:46"},"data":{}}
