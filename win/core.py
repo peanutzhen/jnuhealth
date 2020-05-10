@@ -4,8 +4,11 @@ import json
 def run():
     # loading password info...
     log_params = None
-    with open(r".\data\password.json",'r') as f:
-        log_params = json.load(f)
+    try:
+        with open(r".\data\password.json",'r') as f:
+            log_params = json.load(f)
+    except FileNotFoundError:
+        return "删掉data文件夹所有文件，重试"
 
     log_params = json.dumps(log_params)
     # Only accept json, cause it is a playload instead of Form data!
@@ -53,7 +56,7 @@ def run():
 
     message = json.loads(r.content)
 
-
+    name = message['data']['xm'] # student's name
 
     # write health status and send it to main web
 
@@ -116,4 +119,4 @@ def run():
     message = json.loads(r.content)
 
     # return feedback
-    return message['meta']['timestamp'] + '\n' + message['meta']['msg']
+    return message['meta']['timestamp'] + '\n' + name + ', ' + message['meta']['msg']
