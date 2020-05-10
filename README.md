@@ -16,4 +16,12 @@ Win下载地址：
 
 提取码：cgwz
 
-Mac直接clone mac文件夹到本地，手动抓包后，修改load.py的相应信息即可。
+Mac直接clone mac文件夹到本地，手动抓包后，修改load.py的相应信息即可,再运行core.py
+配合crontab可以自动打开
+如：
+sudo crontab -e
+# into vi edit...
+# enter:
+0 9 * * * python3 path-to-core.py
+# save adn quit
+即可
