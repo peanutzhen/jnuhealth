@@ -1,29 +1,16 @@
 # 暨南大学打卡小助手
 
-### 提供了WIN和MAC版
+## 2021.2.3更新
 
-win有GUI界面，而MAC没有，且要手动抓包
+直接给你们脚本，有用代码也就几十行，不多，大部分都是信息占行数。
 
+使用前只需安装`Python3`和`Requests`库即可，之后按照代码里的注释操作(`Line 118`开始)。
 
+自动打卡可能要配合服务器使用，没有服务器就还是手动，但是方便很多。
 
-windows版，下载后看readme文档使用
+```bash
+alias a="python3 /your-path-to/main.py" # 创建别名
+a # 执行
+```
 
-
-
-Win下载地址：
-
-链接：https://pan.baidu.com/s/18vaqfw8QjRmTGAm6ReD3mg 
-
-提取码：cgwz
-
-Mac直接clone mac文件夹到本地，手动抓包后，修改load.py的相应信息即可,再运行core.py
-配合crontab可以自动打开
-如：
-
-sudo crontab -e
-（ into vi edit...）
-（enter:）
-0 9 * * * python3 path-to-core.py
-（ save adn quit）
-
-即可
+每天记得打开命令行输入一下`a`就好了，就这样，使用愉快。
