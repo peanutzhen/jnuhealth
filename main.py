@@ -2,19 +2,8 @@ from daemon import Daemon
 from time import sleep
 import requests as req
 import json
+import datetime
 
-# http首部信息
-HEADER = {
-    'Host': 'stuhealth.jnu.edu.cn',
-    'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/81.0.4044.138 Safari/537.36',
-    'Accept-Encoding': 'gzip',
-    'Accept-Language': 'zh-CN,zh;q=0.9',
-    'Connection': 'keep-alive',
-    'Origin': 'https://stuhealth.jnu.edu.cn',
-    'Referer': 'https://stuhealth.jnu.edu.cn/'
-}
 
 ## 打卡成员列表
 # 手动抓包(Chrome开发者模式 F12)
@@ -30,12 +19,31 @@ attend_list = [
 ]
 
 
+# http首部信息
+HEADER = {
+    'Host': 'stuhealth.jnu.edu.cn',
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/81.0.4044.138 Safari/537.36',
+    'Accept-Encoding': 'gzip',
+    'Accept-Language': 'zh-CN,zh;q=0.9',
+    'Connection': 'keep-alive',
+    'Origin': 'https://stuhealth.jnu.edu.cn',
+    'Referer': 'https://stuhealth.jnu.edu.cn/'
+}
+
+
 class Server(Daemon):
     def run(self):
         while True:
             for student in attend_list:
                 self.attend(student)
-            sleep(5)
+            # sleep until 2AM
+            t = datetime.datetime.today()
+            future = datetime.datetime(t.year, t.month, t.day, 2, 0)
+            if t.hour >= 2:
+                future += datetime.timedelta(days=1)
+            sleep((future - t).total_seconds())
 
     # 自动打卡函数run
     def attend(self, log_params):
@@ -145,4 +153,4 @@ if __name__ == "__main__":
         stdout='attend.log',
         stderr='error.log'
     )
-    server.run()
+    server.start()
