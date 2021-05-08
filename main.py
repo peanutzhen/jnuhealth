@@ -37,8 +37,17 @@ class Server(Daemon):
     def run(self):
         while True:
             for student in attend_list:
-                self.attend(student)
-            # sleep until 2AM
+                # 最大重试次数 5
+                for attempt in range(5):
+                    try:
+                        self.attend(student)
+                    except:
+                        sleep(5)
+                        continue
+                    else:
+                        break
+                
+            # 每晚凌晨2点自动打卡
             t = datetime.datetime.today()
             future = datetime.datetime(t.year, t.month, t.day, 2, 0)
             if t.hour >= 2:
