@@ -18,7 +18,6 @@ attend_list = [
     }
 ]
 
-
 # http首部信息
 HEADER = {
     'Host': 'stuhealth.jnu.edu.cn',
@@ -37,8 +36,8 @@ class Server(Daemon):
     def run(self):
         while True:
             for student in attend_list:
-                # 最大重试次数 5
-                for attempt in range(5):
+                # 最大重试次数 10
+                for attempt in range(10):
                     try:
                         self.attend(student)
                     except:
@@ -46,9 +45,9 @@ class Server(Daemon):
                         continue
                     else:
                         break
-                
-            # 每晚凌晨2点自动打卡
+
             t = datetime.datetime.today()
+            # 每晚凌晨2点自动打卡 你可以设置你想自动打卡的时间
             future = datetime.datetime(t.year, t.month, t.day, 2, 0)
             if t.hour >= 2:
                 future += datetime.timedelta(days=1)
@@ -96,63 +95,30 @@ class Server(Daemon):
         # 构造打卡信息并上传
         # message['data']['mainTable']有你上一次打卡的信息
         # 可以利用它快速构造正确的信息
-        mainData = message['data']['mainTable']
-        health_params = {
-            "mainTable": {
-                "wayStart": mainData['wayStart'],
-                "arriveTime": mainData['arriveTime'],
-                "way2Start": mainData['way2Start'],
-                "language": mainData['language'],
-                "declareTime": message['meta']['timestamp'].split(' ')[0],
-                "personNo": mainData['personNo'],
-                "personName": message['data']['xm'],
-                "sex": message['data']['xbm'],
-                "professionName": message['data']['zy'],
-                "collegeName": message['data']['yxsmc'],
-                "phoneArea": mainData['phoneArea'],
-                "phone": mainData['phone'],
-                "assistantName": mainData['assistantName'],
-                "assistantNo": mainData['assistantNo'],
-                "className": mainData['className'],
-                "linkman": mainData['linkman'],
-                "linkmanPhoneArea": mainData['linkmanPhoneArea'],
-                "linkmanPhone": mainData['linkmanPhone'],
-                "personHealth": mainData['personHealth'],
-                "temperature": mainData['temperature'],
-                "personHealth2": mainData['personHealth2'],
-                "leaveState": mainData['leaveState'],
-                "leaveHubei": mainData['leaveHubei'],
-                "wayType1": mainData['wayType1'],
-                "wayType2": mainData['wayType2'],
-                "wayType3": mainData['wayType3'],
-                "wayType5": mainData['wayType5'],
-                "wayType6": mainData['wayType6'],
-                "wayTypeOther": mainData['wayTypeOther'],
-                "wayNo": mainData['wayNo'],
-                "currentArea": mainData['currentArea'],
-                "inChina": mainData['inChina'],
-                "personC1id": mainData['personC1id'],
-                "personC1": mainData['personC1'],
-                "personC2id": mainData['personC2id'],
-                "personC2": mainData['personC2'],
-                "personC3id": mainData['personC3id'],
-                "personC3": mainData['personC3'],
-                "personC4": mainData['personC4'],
-                "otherC4": mainData['otherC4'],
-                "isPass14C1": mainData['isPass14C1'],
-                "isPass14C2": mainData['isPass14C2'],
-                "isPass14C3": mainData['isPass14C3']
-            },
+        mainTable = message['data']['mainTable']
+        mainTable["declareTime"] = message['meta']['timestamp'].split(' ')[0]
+        mainTable["personName"] = message['data']['xm'],
+        mainTable["sex"] = message['data']['xbm'],
+        mainTable["professionName"] = message['data']['zy'],
+        mainTable["collegeName"] = message['data']['yxsmc'],
+
+        secondTable = message['data']['secondTable']
+        payload = {
+            "mainTable": mainTable,
+            "secondTable": secondTable,
             "jnuid": jnuid
         }
 
         r = req.post(
             'https://stuhealth.jnu.edu.cn/api/write/main',
-            data=json.dumps(health_params),
+            data=json.dumps(payload),
             headers=HEADER
         )
         message = json.loads(r.content)
-        print('main.py: ' + message['meta']['timestamp'] + name + '，打卡成功！！')
+        if message["meta"]["success"] == True:
+            print('main.py: ' + message['meta']['timestamp'] + name + '，打卡成功！！')
+        else:
+            print(f'main.py: post failed, due to {message["meta"]}')
 
 
 if __name__ == "__main__":
