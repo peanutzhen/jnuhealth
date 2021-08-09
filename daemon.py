@@ -31,6 +31,7 @@ import time
 import signal
 
 
+# TODO: 轻量化Daemon类 减去不必要的功能
 class Daemon(object):
     """
     A generic daemon class.

@@ -4,8 +4,8 @@ import requests as req
 import json
 import datetime
 
-
-## 打卡成员列表
+# TODO: 使用yaml配置
+# 打卡成员列表
 # 手动抓包(Chrome开发者模式 F12)
 # 在stuhealth.jnu.edu.cn下，打开开发者模式，选择Network
 # 登陆后，选择login这个xhr类型的文件，底下有postData这行，复制过来就好
@@ -18,6 +18,7 @@ attend_list = [
     }
 ]
 
+# TODO: 使用yaml配置
 # http首部信息
 HEADER = {
     'Host': 'stuhealth.jnu.edu.cn',
@@ -53,6 +54,7 @@ class Server(Daemon):
                 future += datetime.timedelta(days=1)
             sleep((future - t).total_seconds())
 
+    # TODO: 使用静态函数而不是类方法
     # 自动打卡函数run
     def attend(self, log_params):
         # 获取 jnuid 和 idtype 这个两个参数信息
@@ -69,7 +71,7 @@ class Server(Daemon):
             return
         elif message['meta']['msg'] == '登录成功，今天未填写':
             print('main.py: %s正在打卡...' % (log_params.get('username')))
-        elif message['meta']['success'] == False:
+        elif not message['meta']['success']:
             print(message['meta']['msg'] + 'main.py: 请检查你的log_params是否有误！')
             return
 
@@ -95,17 +97,28 @@ class Server(Daemon):
         # 构造打卡信息并上传
         # message['data']['mainTable']有你上一次打卡的信息
         # 可以利用它快速构造正确的信息
-        mainTable = message['data']['mainTable']
-        mainTable["declareTime"] = message['meta']['timestamp'].split(' ')[0]
-        mainTable["personName"] = message['data']['xm'],
-        mainTable["sex"] = message['data']['xbm'],
-        mainTable["professionName"] = message['data']['zy'],
-        mainTable["collegeName"] = message['data']['yxsmc'],
+        main_table = message['data']['mainTable']
+        main_table["declareTime"] = message['meta']['timestamp'].split(' ')[0]
+        main_table["personName"] = message['data']['xm']
+        main_table["sex"] = message['data']['xbm']
+        main_table["professionName"] = message['data']['zy']
+        main_table["collegeName"] = message['data']['yxsmc']
+        # 删去无用的字段 否则插入数据失败
+        del main_table["id"]
+        for k, v in list(main_table.items()):
+            if v == "":
+                del main_table[k]
 
-        secondTable = message['data']['secondTable']
+        second_table = message['data']['secondTable']
+        # 删去无用的字段 否则插入数据失败
+        del second_table["id"]
+        for k, v in list(second_table.items()):
+            if v == "":
+                del second_table[k]
+
         payload = {
-            "mainTable": mainTable,
-            "secondTable": secondTable,
+            "mainTable": main_table,
+            "secondTable": second_table,
             "jnuid": jnuid
         }
 
@@ -115,10 +128,10 @@ class Server(Daemon):
             headers=HEADER
         )
         message = json.loads(r.content)
-        if message["meta"]["success"] == True:
+        if message["meta"]["success"]:
             print('main.py: ' + message['meta']['timestamp'] + name + '，打卡成功！！')
         else:
-            print(f'main.py: post failed, due to {message["meta"]}')
+            raise Exception(f'main.py: post failed, due to {message["meta"]}')
 
 
 if __name__ == "__main__":
